@@ -14,6 +14,7 @@ A collection of systems and patterns that help OpenClaw agents become more effec
 | `HEARTBEAT_ADDITIONS.md` | Enhancements to add to your existing HEARTBEAT.md |
 | `AGENTS_ADDITIONS.md` | Enhancements to add to your existing AGENTS.md |
 | `mistakes/` | Directory structure for tracking and learning from errors |
+| `scripts/ddg-search.js` | DuckDuckGo HTML scraper - rate-limit-free search fallback |
 
 ## Installation
 
@@ -145,6 +146,25 @@ These systems exist because:
 4. **Improvement requires reflection** - Logging enables pattern recognition
 
 The goal isn't perfection—it's compound improvement over time.
+
+## Scripts
+
+### DuckDuckGo Search (`scripts/ddg-search.js`)
+
+Rate-limit-free web search fallback. Uses DuckDuckGo's lightweight HTML endpoint instead of paid APIs.
+
+**Why it exists:** Brave Search API rate limits can block research workflows. This script scrapes `html.duckduckgo.com` (the JS-free version designed for old devices), which has no API limits.
+
+**Usage:**
+```bash
+node scripts/ddg-search.js "your search query"           # Plain text
+node scripts/ddg-search.js "your search query" --json    # JSON output
+node scripts/ddg-search.js "your search query" --save    # Save to file
+```
+
+**Returns:** Top 10 results with title, URL, and snippet.
+
+**Install:** Just copy `scripts/ddg-search.js` to your workspace. No dependencies—uses only Node.js built-ins.
 
 ## License
 
