@@ -88,6 +88,35 @@ Instead of keeping everything in context, **search for it when needed**.
 
 **Principle:** Log details to files, then drop them from immediate focus. Search when you need them again.
 
+### Memory Lifecycle Management
+
+Large context windows don't solve memory intelligence. Even with 200k tokens, you need:
+
+**Selection:** What's relevant *right now*?
+- Not everything in memory belongs in this prompt
+- Memory search scores relevance—trust low scores and skip them
+- Ask: "Does this information change my response?"
+
+**Decay:** What's stale?
+- Mark time-sensitive info with `[EXPIRES: YYYY-MM-DD]` or `[VALID UNTIL: condition]`
+- During MEMORY.md reviews, prune entries older than 30 days unless marked `[PERMANENT]`
+- Recent daily logs trump old MEMORY.md entries on same topic
+
+**Conflict Resolution:** What wins when info contradicts?
+- Newer explicit decisions > older implicit assumptions
+- User statements > agent inferences
+- When conflicts detected, log: `[CONFLICT] old: X, new: Y, resolved: Z`
+
+**Reuse:** Don't re-solve solved problems
+- Before complex tasks, search for prior solutions: `"how I solved [problem]"`
+- If validated solution exists, reuse it (cite the source)
+- Log reusable patterns with `[SOLUTION]` prefix for future retrieval
+
+**Governance:** When should something stop influencing behavior?
+- Temporary preferences expire (user said "don't message me today" ≠ forever)
+- Context from one project shouldn't bleed into another
+- Mark scope explicitly: `[SCOPE: project-name]` or `[SCOPE: session-only]`
+
 ## 5. Sub-Agent Offloading
 
 For heavy tasks that would bloat your context:
