@@ -10,6 +10,7 @@ A collection of systems and patterns that help OpenClaw agents become more effec
 |------|---------|
 | `LEARNING_LOOP.md` | Self-correction system with critical thinking protocols |
 | `CONTEXT.md` | Token management and compaction protocols |
+| `GET_SHIT_DONE.md` | Integration guide for GSD spec-driven development |
 | `HEARTBEAT_ADDITIONS.md` | Enhancements to add to your existing HEARTBEAT.md |
 | `AGENTS_ADDITIONS.md` | Enhancements to add to your existing AGENTS.md |
 | `mistakes/` | Directory structure for tracking and learning from errors |
@@ -82,6 +83,20 @@ Structured tags that make memory searchable:
 ### 4. Token Sentinel (`HEARTBEAT_ADDITIONS.md`)
 
 Automated context monitoring during heartbeats with model-specific thresholds.
+
+### 5. Get Shit Done (`GET_SHIT_DONE.md`)
+
+Integration with the [GSD](https://github.com/glittercowboy/get-shit-done) spec-driven development system:
+
+- **Solves context rot** - Fresh 200k context per task
+- **Multi-agent orchestration** - Parallel research, planning, execution
+- **Works with coding agents** - Claude Code, OpenCode, Gemini CLI
+- **Atomic commits** - Clean git history per task
+
+Install with:
+```bash
+npx get-shit-done-cc --all --global
+```
 
 ## Optional: Semantic Memory with `qmd`
 
