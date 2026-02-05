@@ -1,82 +1,86 @@
-# LEARNING_LOOP.md - Self-Correction & Critical Thinking System
+# LEARNING_LOOP.md - Self-Improvement System
 
-This file defines protocols for identifying, logging, and fixing recurring mistakes to achieve compound improvement.
+A structured system for compound improvement through mistake tracking and pattern recognition.
 
-## 1. Critical Thinking Protocol (The "Why" Filter)
+## The Loop
 
-Before executing any complex task, perform a quick internal simulation:
+```
+Mistake → Log → Pattern? → Fix → Verify → Document
+```
 
-1. **Goal:** What is the user *actually* trying to achieve? (Look past the literal instruction)
-2. **Context:** What do I already know? (Check `MEMORY.md`, recent daily logs)
-3. **Risk:** What happens if I am wrong? (See Decision Framework below)
-4. **Strategy:** Is this the most direct path? Can I batch steps?
+## 1. Log Every Mistake
 
-## 2. The Mistake Log (`mistakes/index.json`)
+When something goes wrong, add to `mistakes/index.json`:
 
-Every time a mistake is identified (by user feedback or self-realization), log it immediately.
-
-**Structure:**
 ```json
-[
-  {
-    "id": "M-YYYYMMDD-001",
-    "date": "YYYY-MM-DD",
-    "trigger": "How the mistake was discovered",
-    "description": "What happened vs. what should have happened",
-    "rootCause": "Why it happened (lack of context / ambiguous rule / assumption / etc.)",
-    "fix": "What was changed to prevent recurrence",
-    "status": "resolved | open | monitoring"
-  }
-]
+{
+  "id": "M-YYYYMMDD-001",
+  "date": "YYYY-MM-DD",
+  "trigger": "What revealed the mistake",
+  "description": "What went wrong",
+  "rootCause": "Why it happened",
+  "fix": "What was changed",
+  "status": "resolved|ongoing"
+}
 ```
 
-**Workflow:**
-1. Mistake happens → Log immediately to `mistakes/index.json`
-2. Identify root cause → Was it a one-off or systemic?
-3. Apply fix → Update relevant file (AGENTS.md, TOOLS.md, skill, etc.)
-4. Mark status → `resolved` when fix is proven
+**Key insight:** Log immediately when the mistake happens, not later. You'll forget the details.
 
-## 3. Pattern Analysis (`mistakes/patterns.md`)
+## 2. Detect Patterns
 
-Review the log weekly (or during a heartbeat). If the same *type* of mistake happens 3+ times, it's a **Pattern**.
+If the same *type* of mistake happens 2+ times → it's a pattern.
 
-When you identify a pattern:
-- Document it in `mistakes/patterns.md`
-- Define the systemic fix needed (rule change, workflow adjustment, tool config)
-- Implement the fix
-- Track if it actually works
+Add to `mistakes/patterns.md`:
+- Related mistake IDs
+- Common root cause
+- Systemic fix (not a band-aid)
 
-## 4. Proven Fixes (`mistakes/fixes.md`)
+**Pattern examples from real usage:**
+- Channel/destination confusion (3 occurrences → created mapping doc)
+- Token/context overflow (2 occurrences → added sentinel checks)
+- Infrastructure mental model errors (2 occurrences → documented architecture)
 
-A "cookbook" of solutions that have worked. When facing a familiar problem, check here first.
+## 3. Document Fixes
 
-Format:
-```markdown
-## [Fix] Descriptive Name
-- **Problem:** What kept going wrong
-- **Solution:** What fixed it permanently
-- **Date Added:** When the fix was proven
-```
+When a fix works, add to `mistakes/fixes.md`:
+- Problem description
+- Solution that worked
+- Prevention steps
 
-## 5. Decision Framework (Autonomy Levels)
+This becomes your "cookbook" — check it before solving similar problems.
 
-Not all actions carry equal risk. Use this matrix to decide whether to act immediately, notify, or ask first:
+## 4. Pre-Task Checklist
 
-| Risk Level | Definition | Action |
-|:-----------|:-----------|:-------|
-| **Low** | Reading files, organizing local folders, searching web, drafting internal docs | **ACT IMMEDIATELY** |
-| **Medium** | Editing non-critical code, creating new files, installing safe tools | **ACT & NOTIFY** ("I did X because Y") |
-| **High** | Deleting files, public posting (email/social), spending money, modifying core config | **ASK FIRST** ("I recommend X. Approve?") |
+Before complex tasks, quick mental check:
 
-**When uncertain:** Default to the higher risk level. It's better to ask unnecessarily than to break something silently.
+1. **Goal** — What does the user *actually* want?
+2. **Context** — What do I already know? (Search memory first)
+3. **Risk** — What if I'm wrong? (See autonomy levels)
+4. **Prior art** — Have I solved this before?
 
-## 6. Integration with Daily Workflow
+## 5. Decision Framework
 
-- **Start of session:** Skim recent mistakes to refresh awareness
-- **During work:** Log mistakes as they happen (don't defer)
-- **During heartbeat:** Quick scan for unresolved items
-- **Weekly:** Review patterns, update fixes cookbook
+| Risk | Examples | Action |
+|------|----------|--------|
+| **Low** | Read files, web search, organize | Act immediately |
+| **Medium** | Edit code, create files, install tools | Act & notify |
+| **High** | Delete files, public posts, spend money | Ask first |
+
+**When uncertain:** Default to higher risk level.
+
+## 6. Automation
+
+For daily self-review without manual effort, create a nightly cron job that:
+1. Reviews today's memory file
+2. Checks for new mistakes
+3. Scans for pattern emergence
+4. Implements fixes
+5. Verifies changes
+
+Example cron schedule: `30 0 * * *` (12:30 AM daily)
+
+This makes the learning loop automatic, not dependent on remembering to do it.
 
 ---
 
-*The goal isn't to never make mistakes—it's to never make the same mistake twice.*
+*The goal isn't zero mistakes—it's zero repeated mistakes.*

@@ -8,11 +8,13 @@ A collection of systems and patterns that help OpenClaw agents become more effec
 
 | File | Purpose |
 |------|---------|
-| `LEARNING_LOOP.md` | Self-correction system with critical thinking protocols |
+| `LEARNING_LOOP.md` | Self-correction system with mistake tracking and pattern detection |
 | `CONTEXT.md` | Token management and compaction protocols |
+| `MAINTENANCE.md` | **NEW:** System health guardrails for perpetual health |
 | `GET_SHIT_DONE.md` | Integration guide for GSD spec-driven development |
 | `HEARTBEAT_ADDITIONS.md` | Enhancements to add to your existing HEARTBEAT.md |
 | `AGENTS_ADDITIONS.md` | Enhancements to add to your existing AGENTS.md |
+| `MODEL_BENCHMARK.md` | LLM benchmark results and model selection guide |
 | `mistakes/` | Directory structure for tracking and learning from errors |
 | `scripts/ddg-search.js` | DuckDuckGo HTML scraper - rate-limit-free search fallback |
 
@@ -71,7 +73,17 @@ Token usage is your biggest constraint. This system helps you:
 - **Offload** heavy tasks to sub-agents
 - **Retrieve** instead of storing (search > scrollback)
 
-### 3. Memory Prefixes (`AGENTS_ADDITIONS.md`)
+### 3. System Health (`MAINTENANCE.md`)
+
+Guardrails to keep your agent healthy long-term:
+
+- **Automated checks** — Nightly self-review cron job
+- **File size targets** — MEMORY.md ~3KB, AGENTS.md ~3KB
+- **Memory hygiene** — Keep 14 days active, archive older
+- **Recovery procedures** — What to do when things break
+- **Weekly/monthly checklists** — Verification routines
+
+### 4. Memory Prefixes (`AGENTS_ADDITIONS.md`)
 
 Structured tags that make memory searchable:
 
@@ -81,11 +93,11 @@ Structured tags that make memory searchable:
 - `[TASK]` - Open loops and TODOs
 - `[EVENT]` - Milestones and completions
 
-### 4. Token Sentinel (`HEARTBEAT_ADDITIONS.md`)
+### 5. Token Sentinel (`HEARTBEAT_ADDITIONS.md`)
 
 Automated context monitoring during heartbeats with model-specific thresholds.
 
-### 5. Get Shit Done (`GET_SHIT_DONE.md`)
+### 6. Get Shit Done (`GET_SHIT_DONE.md`)
 
 Integration with the [GSD](https://github.com/glittercowboy/get-shit-done) spec-driven development system:
 
