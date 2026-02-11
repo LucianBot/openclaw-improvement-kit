@@ -16,6 +16,8 @@ A collection of systems and patterns that help OpenClaw agents become more effec
 | `AGENTS_ADDITIONS.md` | Enhancements to add to your existing AGENTS.md |
 | `MODEL_BENCHMARK.md` | LLM benchmark results and model selection guide |
 | `mistakes/` | Directory structure for tracking and learning from errors |
+| `SECURITY.md` | Credential protection: pre-commit hooks and secret scanning |
+| `SESSION_MANAGEMENT.md` | Prevent session accumulation and memory leaks |
 
 ### Documentation (`docs/`)
 
@@ -34,6 +36,10 @@ A collection of systems and patterns that help OpenClaw agents become more effec
 | `morning-briefing.sh` | **NEW:** Trello + Git + System health consolidated report |
 | `deep-research.sh` | **NEW:** Dual-source research (Perplexity + Gemini) |
 | `trello.sh` | **NEW:** CLI for Trello board management |
+| `pre-commit-secret-scan.sh` | Pre-commit hook that blocks secrets |
+| `install-secret-guard.sh` | One-command security guard install for any repo |
+| `scan-repo-secrets.sh` | Pre-push manual secret scanner |
+| `cleanup-sessions.sh` | Remove old cron session transcripts |
 
 ## Quick Start
 
@@ -104,7 +110,33 @@ Complete guide to OpenClaw's memory system:
 - **Pre-compaction flush** — Save memories before context loss
 - **Citations** — Verifiable source references
 
-### 5. Model Resilience (`docs/model-resilience-watchdog.md`)
+### 5. Security Guard (`SECURITY.md`)
+
+Automated safeguards to prevent credential exposure:
+
+- **Pre-commit hook** - Blocks commits containing API keys, tokens, or sensitive files
+- **Install script** - One-command deployment to any repo
+- **Pre-push scanner** - Manual check before pushing to remote
+- **Pattern library** - Detects Google, OpenAI, Anthropic, GitHub, Slack, Vercel, Trello, PostHog keys
+
+Install to your workspace:
+```bash
+./scripts/install-secret-guard.sh /path/to/repo
+```
+
+### 6. Session Management (`SESSION_MANAGEMENT.md`)
+
+Cron isolated sessions accumulate indefinitely (unlike sub-agents). Over time this causes:
+- Gateway slowdowns
+- Memory pressure
+- Slow restarts
+
+Schedule regular cleanup:
+```bash
+./scripts/cleanup-sessions.sh 3  # Keep last 3 days
+```
+
+### 7. Model Resilience (`docs/model-resilience-watchdog.md`)
 
 Auto-failover for provider issues:
 
